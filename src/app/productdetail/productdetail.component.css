@@ -1,0 +1,109 @@
+.main {
+  display: block;
+}
+
+.detail-table {
+  position: relative;
+  left: 20%;
+  margin: 50px;
+  padding: 0 40px;
+  min-width: 1024px;
+  max-width: 1920px;
+  box-sizing: border-box;
+  display: flex;
+}
+
+div {
+  display: block;
+}
+
+.image-column {
+  top: 40px;
+  height: fit-content;
+  width: 500px;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: start;
+  align-items: flex-start;
+  position: sticky;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  flex: 0 0 492px;
+  overflow: hidden;
+}
+
+.image {
+  width: 500px;
+  height: 500px;
+}
+
+.content-column {
+  margin-left: 30px;
+  font-family: sans-serif;
+  width : 500px;
+
+}
+
+.header-detail {
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.price {
+  font-size: large;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 14px;
+}
+
+.subItem-title-div {
+  background-color: gainsboro;
+  margin-top: 20px;
+  padding-left: 20px;
+  line-height: 30px;
+}
+
+.addOnItem-price {
+  float: right;
+}
+
+.subItem-desc {
+  font-size: small;
+  color: gray;
+}
+.addOnItem-name{
+  padding-left: 10px;
+}
+.addOn-option {
+  padding: 10px 10px 0 30px;
+}
+.contern-footer {
+  border-top: 1px solid darkgray;
+  margin-top: 25px;
+  padding-top: 25px;
+}
+.select-quantity select{
+  border-radius: 50px 50px 50px 50px;
+  background-color: #EEEEEE;
+  border: none;
+  height: 36px ;
+  padding: 0 10px 0 15px;
+}
+.addOrder {
+  margin-top: 25px;
+  color: white;
+  background-color: black;
+  width: 100%;
+  border-radius: 10px;
+  min-height: 50px;
+  line-height: 25px;
+  font-size: 18px;
+  font-weight: 500;
+  -webkit-box-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+}

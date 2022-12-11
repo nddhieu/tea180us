@@ -1,0 +1,66 @@
+<div class="container cartWindows">
+
+  <div>
+    <div class="cartHeader">
+      <div class="shopName"> {{shopName}}    </div>
+      <div class="address"> {{address}}    </div>
+    </div>
+    <div class="seperateLine"></div>
+    <div class="cartListItem">
+      <div *ngFor="let item of cart.items">
+        <div class="seperateLine"></div>
+        <div class="row">
+          <div class="column left">
+            <div class="select-quantity">
+              <!--            <select [(ngModel)]="item.quantity">-->
+              <select #selectQuantity (change)="onSelect(item,selectQuantity.value)">
+                <option default>0</option>
+                <option *ngFor="let quantity of quantityOption"
+                        [selected]="item.quantity ===quantity">{{quantity}}</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="column middle">
+            <div class="cartItemName">{{item.food.name}}</div>
+            <div *ngIf="optionsBeenAdded(item)">
+              <div class="addOnTitle">{{optionsBeenAdded(item).title}}</div>
+              <div *ngFor="let addedOption of optionsBeenAdded(item).option">
+                <div class="addOnOptionName">{{addedOption.name}}</div>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="column right">{{item.getPrice()|currency}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="row">
+      <div class="column left">Total</div>
+      <span class="column middle"></span>
+
+      <div class="column right">
+        <span class="price">{{cart.getTotalPrice()|currency}}</span>
+      </div>
+    </div>
+    <div class="checkOut"  *ngIf="getCurrentUser() && cart.getTotalPrice() >0">
+      <google-pay-button
+        environment= {{googlePayEnvironment}}
+        buttonType="buy"
+        buttonColor="black"
+        [paymentRequest]="getPaymentRequest()"
+        (loadpaymentdata)="onLoadPaymentData($event)"
+        (error)="onError($event)"
+        [paymentAuthorizedCallback]="onPaymentDataAuthorized"
+      >
+      </google-pay-button>
+    </div>
+    <div>
+      <button class="checkOut" *ngIf="getCurrentUser() && (cart.getTotalPrice() == 0)" >Please add item to cart before checkout</button>
+      <button class="checkOut" *ngIf="!getCurrentUser()&& (cart.getTotalPrice() > 0)" (click)="signIn()"> Please sign in before checkout</button>
+    </div>
+  </div>
+</div>

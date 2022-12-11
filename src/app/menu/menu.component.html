@@ -1,0 +1,28 @@
+<!--<app-search></app-search>-->
+<ul>
+  <li *ngFor="let product of products">
+    <a class="itemList selectItemDetail" routerLink="/item/{{product.id}}"  >
+      <!--      <img src="{{food.imageUrl}}" class="itemImage" alt="home image">-->
+      <div class="itemImageContainer " >
+        <!--        <div class="btn btn-default btn-lg btn-link" style="font-size:36px;" >-->
+        <!--          <span class="glyphicon glyphicon-comment"></span>-->
+        <img src="{{product.imageUrl}}" alt="home image" class="itemImage" >
+        <!--        </div>-->
+        <span class="badge badge-notify">
+<!--          <button *ngIf="isItemInCart(food.id)" class="quick-add badge" (click)="removeFromCart(food.id)"> - </button>-->
+          <span  >
+            {{getquantityInCartByItemId(product.id)}}
+          </span>
+          <!--          <button class="quick-add badge" (click)="addToCart(food)"> + </button>-->
+          </span>
+        <button class="detail-order">detail item</button>
+      </div>
+      <div class="content" routerLink="/item/{{product.id}}">
+        <div class="name"> {{product.name}}</div>
+        <div class="price">{{product.price|currency}}</div>
+      </div>
+    </a>
+  </li>
+</ul>
+
+

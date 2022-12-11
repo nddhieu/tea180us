@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  display: inline-block;
+
+}
+
+.left {
+  width: 75%;
+  min-inline-size: 370px;
+
+  /*display: inline-block;*/
+  /*white-space: nowrap;*/
+
+
+}
+
+.right {
+  width: 25%;
+  min-inline-size: 370px;
+  float: right;
+  white-space: nowrap;
+
+  display: inline-block;
+}
+.row {
+  width: 100%;
+  white-space: nowrap;
+  /*overflow-x: scroll;*/
+  min-width: 1500px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

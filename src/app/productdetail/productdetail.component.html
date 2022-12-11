@@ -1,0 +1,59 @@
+<div class="main">
+  <div class="detail-table">
+    <div class="image-column">
+      <img class="image" src="{{food.imageUrl}}" alt="{{food.name}}">
+    </div>
+    <div class="content-column">
+      <div class="item-detail">
+        <div class="header">
+          <div class="header-detail">
+            <span>{{food.name}}</span>
+          </div>
+          <div class="price">
+            {{food.price|currency}}
+          </div>
+          <div class="description">
+            {{food.description}}
+          </div>
+        </div>
+        <div class="option">
+          <div *ngIf="food.addOn != null">
+
+            <div class="subItem-title-div">
+              <div class="subItem-title">
+                {{food.addOn.title}}
+              </div>
+              <div class="subItem-desc">
+                {{food.addOn.description}}
+              </div>
+            </div>
+            <div>
+              <div>
+                <div *ngFor="let optionItem of food.addOn.option">
+                  <div class="addOn-option">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="optionItem.isAdd">
+                    <span class="addOnItem-name">{{optionItem.name}} </span>
+                    <span class="addOnItem-price">+{{optionItem.price|currency}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="contern-footer">
+        <div class="select-quantity">
+          <select [(ngModel)]="selectQuantity">
+            <!--            <option [defaultSelected]="null"></option>-->
+            <option default>0</option>
+            <option *ngFor="let quantity of quantityOption">{{quantity}}</option>
+          </select>
+        </div>
+        <button class="addOrder"
+                (click)="addItemToOrder(food)">Add {{selectQuantity}} to order {{itemCost|currency}} </button>
+      </div>
+    </div>
+
+  </div>
+</div>

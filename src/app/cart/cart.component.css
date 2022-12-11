@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+}
+
+.left {
+  width: 15%;
+}
+.middle {
+  width: 65%;
+  padding-left : 40px;
+
+}
+.right {
+  width: 20%;
+  float: right;
+  position:relative;
+  right:10px;
+  text-align: right;
+}
+.price{
+  padding-right: 55px;
+}
+.row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.cartListItem {
+  height:700px;
+  overflow: scroll;
+}
+
+.cartWindows {
+  border-radius: 20px 20px 20px 20px;
+  border: 1px solid whitesmoke;
+  margin: 25px
+}
+.cartHeader {
+  margin-bottom: 15px;
+}
+.cartItemName {
+  font-size: 18px;
+  font-weight: bold;
+}
+.addOnTitle{
+  font-size: 16px;
+}
+.addOnOptionName{
+  font-size: 14px;
+  color: gray;
+}
+.select-quantity select{
+  border-radius: 50px 50px 50px 50px;
+  background-color: #EEEEEE;
+  border: none;
+  height: 36px ;
+  padding: 0 5px 0 15px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.shopName {
+  font-size: 30px;
+  font-weight: bolder;
+}
+.seperateLine {
+  border-bottom: 1px solid gray;
+}
+.checkOut {
+  margin: 25px 25px 25px 25px;
+  color: white;
+  background-color: black;
+  width: 90%;
+  border-radius: 10px;
+  min-height: 50px;
+  line-height: 25px;
+  font-size: 18px;
+  font-weight: 500;
+  -webkit-box-pack: center;
+  justify-content: center;
+  /*box-sizing: border-box;*/
+
+}
+.checkOut:hover{
+  opacity: 0.8;
+  cursor: pointer;
+  box-shadow: darkgray;
+}
