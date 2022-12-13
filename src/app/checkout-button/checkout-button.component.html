@@ -1,0 +1,3 @@
+<div>
+  <button class="checkOut" *ngIf="(cart.getTotalCostIncludeTax() > 0)" (click)="onCheckoutButtonClick()">Checkout</button>
+</div>

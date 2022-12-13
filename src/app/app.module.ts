@@ -12,6 +12,7 @@ import { MenuComponent } from './menu/menu.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductdetailComponent } from './productdetail/productdetail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import {CheckoutButtonComponent} from "./checkout-button/checkout-button.component";
 
 @NgModule({
   declarations: [
@@ -21,15 +22,15 @@ import { CheckoutComponent } from './checkout/checkout.component';
     MenuComponent,
     CartComponent,
     ProductdetailComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CheckoutButtonComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    GooglePayButtonModule,
-    ReactiveFormsModule
+    GooglePayButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
