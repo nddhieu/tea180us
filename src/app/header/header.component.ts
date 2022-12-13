@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
       client_id: "472967234950-2a4jr2lag1r4efkqpdscmao4vtr3thc4.apps.googleusercontent.com",
       callback: this.handleCredentialResponse.bind(this),
       auto_select: false,
-      data_auto_select: false,
       cancel_on_tap_outside: false,
     });
     console.log("render signin button");
@@ -52,9 +51,9 @@ export class HeaderComponent implements OnInit {
       user.imageUrl =responsePayload.picture,
       user.email =responsePayload.email,
       user.emailVerify = responsePayload.email_verified
+    console.log("User detail: "+ JSON.stringify(user));
 
     this.userService.setCurrentUser(user);
-    console.log("User detail: "+ JSON.stringify(user));
   }
   decodeJwtResponse(token) {
     var base64Url = token.split(".")[1];

@@ -11,6 +11,7 @@ import { GooglePayButtonModule } from '@google-pay/button-angular';
 import { MenuComponent } from './menu/menu.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductdetailComponent } from './productdetail/productdetail.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProductdetailComponent } from './productdetail/productdetail.component'
     OrderComponent,
     MenuComponent,
     CartComponent,
-    ProductdetailComponent
+    ProductdetailComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

@@ -39,14 +39,22 @@
   </div>
   <div>
     <div class="row">
+      <div class="column left">Tax</div>
+      <span class="column middle"></span>
+
+      <div class="column right">
+        <span class="price">{{cart.getTaxCost()|currency}}</span>
+      </div>
+    </div>
+    <div class="row">
       <div class="column left">Total</div>
       <span class="column middle"></span>
 
       <div class="column right">
-        <span class="price">{{cart.getTotalPrice()|currency}}</span>
+        <span class="price">{{cart.getTotalCostIncludeTax()|currency}}</span>
       </div>
     </div>
-    <div class="checkOut"  *ngIf="getCurrentUser() && cart.getTotalPrice() >0">
+    <div class="checkOut"  *ngIf="getCurrentUser() && cart.getTotalCostIncludeTax() >0">
       <google-pay-button
         environment= {{googlePayEnvironment}}
         buttonType="buy"
@@ -59,8 +67,9 @@
       </google-pay-button>
     </div>
     <div>
-      <button class="checkOut" *ngIf="getCurrentUser() && (cart.getTotalPrice() == 0)" >Please add item to cart before checkout</button>
-      <button class="checkOut" *ngIf="!getCurrentUser()&& (cart.getTotalPrice() > 0)" (click)="signIn()"> Please sign in before checkout</button>
+      <button class="checkOut" *ngIf="(cart.getTotalCostIncludeTax() > 0)" (click)="onCheckoutButtonClick()">Checkout</button>
     </div>
+
   </div>
+
 </div>

@@ -47,7 +47,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cart = this.cartService.getCart();
-    this.cart.totalPrice = this.cart.getTotalPrice();
+    this.cart.totalPrice = this.cart.getTotalCostIncludeTax();
     this.totalPrice = this.cart.totalPrice.toString();
     // this.currentUser = this.userService.getCurrentUser();
     // this._serviceSubscription = this.userService.onChangeUser.subscribe({
@@ -151,7 +151,7 @@ export class CartComponent implements OnInit {
 
   getPaymentRequest(): google.payments.api.PaymentDataRequest {
     console.log("in get payment request");
-    this.paymentRequest.transactionInfo.totalPrice = this.cart.getTotalPrice().toString();
+    this.paymentRequest.transactionInfo.totalPrice = this.cart.getTotalCostIncludeTax().toString();
     this.paymentRequest.merchantInfo.merchantId = constant.merchantId;
     this.paymentRequest.merchantInfo.merchantName = constant.merchantName;
 
@@ -160,15 +160,7 @@ export class CartComponent implements OnInit {
 
   signIn() {
     console.log("signin")
-    // @ts-ignore
-    google.accounts.id.initialize({
-      client_id: "472967234950-2a4jr2lag1r4efkqpdscmao4vtr3thc4.apps.googleusercontent.com",
-      callback: this.handleCredentialResponse.bind(this),
-      auto_select: true,
-      data_auto_select: false,
-      cancel_on_tap_outside: true,
-    });
-    console.log("render signin button");
+
     // @ts-ignore
     google.accounts.id.renderButton(
       // @ts-ignore
@@ -181,38 +173,8 @@ export class CartComponent implements OnInit {
     google.accounts.id.prompt((notification: PromptMomentNotification) => {});
     console.log("prom  signin button");
   }
-  async handleCredentialResponse(response: any) {
-    // Here will be your response from Google.
-    console.log("---------------------------handleCredentialResponse-----------------------");
-    // to decode the credential response.
-    console.log("in handleCredentialResponse");
 
-    const responsePayload = this.decodeJwtResponse(response.credential);
-
-    let user:User = new User();
-    user.id = responsePayload.sub,
-      user.fullName =responsePayload.name,
-      user.firstName = responsePayload.given_name,
-      user.lastName = responsePayload.family_name,
-      user.imageUrl =responsePayload.picture,
-      user.email =responsePayload.email,
-      user.emailVerify = responsePayload.email_verified
-
-    this.userService.setCurrentUser(user);
-    console.log("User detail: "+ JSON.stringify(user));
-  }
-  decodeJwtResponse(token) {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-
-    return JSON.parse(jsonPayload);
+  onCheckoutButtonClick() {
+    this.router.navigate(['/checkout']);
   }
 }
