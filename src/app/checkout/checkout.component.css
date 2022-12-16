@@ -20,3 +20,14 @@
 .welcomeText {
   font-size: x-large;
 }
+.control-label.required:after {
+  color: #d00;
+  content: "*";
+  position: absolute;
+  margin-left: 5px;
+  top:-1px;
+}
+.line-space {
+  /*margin-top: 25px;*/
+  margin-top: 20px;
+}

@@ -14,20 +14,44 @@
   <div  id="order-form">
     <p>Please add below info for your order</p>
     <form [formGroup]="form">
-      <div class="form-group col-6" >
-        <label for="orderName">Order Name</label>
-        <input type="text" class="form-control" id="orderName"
-               placeholder="{{customerName}}" [value]="customerName" >
+      <div class="form-group col-9" >
+        <label for="orderName" class="control-label required">Order Name</label>
+<!--        <input type="text" class="form-control" id="orderName"-->
+<!--               placeholder="{{customerName}}" [value]="customerName" >-->
+        <input class="form-control" formControlName="name" id="orderName">
+        <div *ngIf="form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)" class="alert-danger">
+          <div *ngIf="form.controls['name'].errors.required">
+            Name is required.
+          </div>
+        </div>
       </div>
-      <div class="form-group col-6">
-        <label for="phone-number">Phone Number</label>
+      <div class="form-group col-9">
+        <label class="control-label required" for="phone-number">Phone Number</label>
 
         <input class="form-control"  type="tel" appPhoneMask  formControlName="phone" id="phone-number"  >
+        <div *ngIf="form.controls['phone'].invalid && (form.controls['phone'].dirty || form.controls['phone'].touched)" class="alert-danger">
+          <div *ngIf="form.controls['phone'].errors.required">
+            Phone is required.
+          </div>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary" (click)="onSubmitOrderForm()">Submit</button>
+      <button type="submit" class="btn btn-primary"(click)="onSubmitOrderForm()">Submit</button>
     </form>
   </div>
-
+    <div class="line-space"  *ngIf="getCustomerName() && cart.getTotalCostIncludeTax() >0 && isOrderInfoFilled">
+    <google-pay-button
+        environment= {{googlePayEnvironment}}
+        buttonType="pay"
+        buttonColor="black"
+        [paymentRequest]="getPaymentRequest()"
+        (loadpaymentdata)="onLoadPaymentData($event)"
+        (error)="onError($event)"
+        [paymentAuthorizedCallback]="onPaymentDataAuthorized"
+        buttonSizeMode="fill"
+        style="width: 350px; height: 40px;"
+      >
+      </google-pay-button>
+    </div>
   </div>
 
   <div class="column right">

@@ -4,6 +4,9 @@
     <div class="cartHeader">
       <div class="shopName"> {{shopName}}    </div>
       <div class="address"> {{address}}    </div>
+      <div class="orderName" *ngIf="cartService.orderName != null">order name: {{cartService.orderName}}    </div>
+      <div class="orderName" *ngIf="cartService.orderPhone != null">customer phone: {{cartService.orderPhone}}    </div>
+
     </div>
     <div class="seperateLine"></div>
     <div class="cartListItem">
@@ -54,18 +57,7 @@
         <span class="price">{{cart.getTotalCostIncludeTax()|currency}}</span>
       </div>
     </div>
-    <div class="checkOut"  *ngIf="getCurrentUser() && cart.getTotalCostIncludeTax() >0">
-      <google-pay-button
-        environment= {{googlePayEnvironment}}
-        buttonType="buy"
-        buttonColor="black"
-        [paymentRequest]="getPaymentRequest()"
-        (loadpaymentdata)="onLoadPaymentData($event)"
-        (error)="onError($event)"
-        [paymentAuthorizedCallback]="onPaymentDataAuthorized"
-      >
-      </google-pay-button>
-    </div>
+
 
 
   </div>

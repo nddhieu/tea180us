@@ -14,6 +14,7 @@ export class CartService {
   quantityOption: number[] = Array.from({length: 100}, (_, i) => i + 1);
   displayCart: boolean = true;
   orderName: string;
+  orderPhone: string;
   constructor() {
   }
 
@@ -103,5 +104,10 @@ export class CartService {
     this.cart.customerId = customerId;
     console.log("current cart " + JSON.stringify(this.cart));
 
+  }
+
+  setContactOrderToCart(orderName: string, orderPhone: string) {
+    this.orderPhone = orderPhone;
+    this.orderName = orderName;
   }
 }

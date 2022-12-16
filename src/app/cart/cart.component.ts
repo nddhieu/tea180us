@@ -16,8 +16,7 @@ import {AddOn} from "../shared/models/addOn";
 export class CartComponent implements OnInit {
 
 // currentUser: User = this.userService.getCurrentUser();
-  googlePayEnvironment: string = constant.googlePayEnvironment;
-
+  cartService: CartService;
   get currentUser() {
     return this.userService.getCurrentUser();
   }
@@ -29,14 +28,9 @@ export class CartComponent implements OnInit {
   private _serviceSubscription;
   totalPrice: string = '0';
 
-  constructor(private cartService: CartService, private router: Router, private userService: UserService) {
+  constructor(cartService: CartService, private router: Router, private userService: UserService) {
+    this.cartService=cartService;
     this.quantityOption = this.cartService.quantityOption;
-    // this._serviceSubscription = this.userService.onChangeUser.subscribe({
-    //   next: (newUser: User) => {
-    //     this.currentUser = newUser;
-    //     console.log("listen to event user sign in constructor " + this.currentUser);
-    //   }
-    // })
   }
 
   quantityOption: number[];
@@ -49,13 +43,6 @@ export class CartComponent implements OnInit {
     this.cart = this.cartService.getCart();
     this.cart.totalPrice = this.cart.getTotalCostIncludeTax();
     this.totalPrice = this.cart.totalPrice.toString();
-    // this.currentUser = this.userService.getCurrentUser();
-    // this._serviceSubscription = this.userService.onChangeUser.subscribe({
-    //   next: (newUser: User) => {
-    //     this.currentUser = newUser;
-    //     console.log("listen to event user sign in ngonINit " + this.currentUser);
-    //   }
-    // })
     console.log("current User : " + JSON.stringify(this.currentUser));
   }
 
@@ -93,70 +80,14 @@ export class CartComponent implements OnInit {
 
   }
 
-  paymentRequest: google.payments.api.PaymentDataRequest = {
-    apiVersion: 2,
-    apiVersionMinor: 0,
-    allowedPaymentMethods: [
-      {
-        type: 'CARD',
-        parameters: {
-          allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-          allowedCardNetworks: ['AMEX', 'VISA', "DISCOVER", 'MASTERCARD']
-        },
-        tokenizationSpecification: {
-          type: 'PAYMENT_GATEWAY',
-          parameters: {
-            gateway: 'example',
-            gatewayMerchantId: 'exampleGatewayMerchantId'
-          }
-        }
-      }
-    ],
-    merchantInfo: {
-      merchantId: 'BCR2DN4T4SK2LXLN',
-      merchantName: 'Tea180us'
-    },
-    transactionInfo: {
-      totalPriceStatus: 'FINAL',
-      totalPriceLabel: 'Total',
-      totalPrice: '10',
-      currencyCode: 'USD',
-      countryCode: 'US'
-    },
-    callbackIntents: ['PAYMENT_AUTHORIZATION']
-  };
 
-  onLoadPaymentData = (event: Event): void => {
-    const eventDetail = event as CustomEvent<google.payments.api.PaymentData>;
-    console.log('load payment data', eventDetail.detail);
-  }
-
-  onPaymentDataAuthorized: google.payments.api.PaymentAuthorizedHandler = (paymentData) => {
-    console.log('payment authorized', paymentData);
-    this.router.navigateByUrl('/sucessorder');
-    return {
-      transactionState: 'SUCCESS'
-
-    };
-  }
-
-  onError = (event: ErrorEvent): void => {
-    console.error('error', event.error);
-  }
 
   getCurrentUser(): User {
     return this.userService.getCurrentUser();
 
   }
 
-  getPaymentRequest(): google.payments.api.PaymentDataRequest {
-    console.log("in get payment request");
-    this.paymentRequest.transactionInfo.totalPrice = this.cart.getTotalCostIncludeTax().toString();
-    this.paymentRequest.merchantInfo.merchantId = constant.merchantId;
-    this.paymentRequest.merchantInfo.merchantName = constant.merchantName;
 
-    return this.paymentRequest;
-  }
 
   signIn() {
     console.log("signin")
