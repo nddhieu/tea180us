@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/ordersystem",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

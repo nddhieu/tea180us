@@ -10,6 +10,9 @@ const routes: Routes = [
   // {path: 'search/:searchItem', component: HomeComponent},
   {path:'item/:id', component: ProductdetailComponent},
   {path: 'checkout', component: CheckoutComponent},
+  {path: 'RefreshComponent', component: CheckoutComponent},
+
+
   // {path: 'sucessorder', component: SuccessorderComponent},
 ];
 

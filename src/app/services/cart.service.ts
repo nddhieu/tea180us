@@ -13,6 +13,7 @@ import {Customer} from "../shared/models/customer";
 export class CartService {
   quantityOption: number[] = Array.from({length: 100}, (_, i) => i + 1);
   displayCart: boolean = true;
+  orderName: string;
   constructor() {
   }
 

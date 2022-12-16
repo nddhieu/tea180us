@@ -13,6 +13,7 @@ import { CartComponent } from './cart/cart.component';
 import { ProductdetailComponent } from './productdetail/productdetail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import {CheckoutButtonComponent} from "./checkout-button/checkout-button.component";
+import {PhoneMaskDirective} from "./checkout/phone-mask.directive";
 
 @NgModule({
   declarations: [
@@ -23,15 +24,17 @@ import {CheckoutButtonComponent} from "./checkout-button/checkout-button.compone
     CartComponent,
     ProductdetailComponent,
     CheckoutComponent,
-    CheckoutButtonComponent
+    CheckoutButtonComponent,
+    PhoneMaskDirective
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    GooglePayButtonModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        GooglePayButtonModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

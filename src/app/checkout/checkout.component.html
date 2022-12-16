@@ -3,31 +3,31 @@
   <div class="column middle">
 <!--    check sign in-->
 
-  <div>
-    <span id="welcome"></span>
+  <div >
+    <span id="welcome" class="welcomeText" >
+      <span >Welcome <span id="customer-name">{{customerName}}</span> to {{shopName}}</span>
+    </span>
+    <span id="remindSignIn">Please signin to continue</span>
+
   </div>
     <!--    enter order name, phone number-->
-  <div>
-    <form >
-      <div class="form-group">
+  <div  id="order-form">
+    <p>Please add below info for your order</p>
+    <form [formGroup]="form">
+      <div class="form-group col-6" >
         <label for="orderName">Order Name</label>
         <input type="text" class="form-control" id="orderName"
-               placeholder="enter your name">
+               placeholder="{{customerName}}" [value]="customerName" >
       </div>
-      <div class="form-group">
-        <label for="phoneNumber">Phone Number</label>
-        <input type="tel" class="form-control" id="phoneNumber" placeholder="Password">
+      <div class="form-group col-6">
+        <label for="phone-number">Phone Number</label>
+
+        <input class="form-control"  type="tel" appPhoneMask  formControlName="phone" id="phone-number"  >
       </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmitOrderForm()">Submit</button>
     </form>
   </div>
-    <div>
 
-    </div>
   </div>
 
   <div class="column right">
