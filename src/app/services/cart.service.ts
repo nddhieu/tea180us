@@ -20,6 +20,9 @@ export class CartService {
 
   private cart: Cart = new Cart();
 
+  clearCart(){
+    this.cart = new Cart();
+  }
   toggleDisplayCart(){
     console.log("toogleDisplayCart. current " + this.displayCart + "set to " + !this.displayCart);
     this.displayCart = !this.displayCart;

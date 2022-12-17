@@ -8,6 +8,8 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CartService} from "../services/cart.service";
 import {Cart} from "../shared/models/Cart";
+import {Payment} from "../shared/models/payment";
+import {OrderService} from "../services/order.service";
 // import {FormBuilder, FormGroup} from "@angular/forms";
 // import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
@@ -32,7 +34,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   isOrderInfoFilled: boolean = false;
   googlePayEnvironment: string = constant.googlePayEnvironment;
 
-  constructor(userService: UserService, private router: Router , fb:FormBuilder, cartService:CartService) {
+  constructor(userService: UserService, private router: Router , fb:FormBuilder, cartService:CartService, private orderService: OrderService) {
     this.cartService = cartService;
     this.userService = userService;
     this.form=fb.group({
@@ -168,8 +170,19 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   onPaymentDataAuthorized: google.payments.api.PaymentAuthorizedHandler = (paymentData) => {
-    console.log('payment authorized', paymentData);
-    this.router.navigateByUrl('/sucessorder');
+    console.log('payment authorized',JSON.stringify( paymentData));
+    let payment:Payment ={
+      paymentDescription: paymentData.paymentMethodData.description,
+      cardDetail: paymentData.paymentMethodData.info.cardDetails,
+      type: paymentData.paymentMethodData.type,
+      tokenizationData:paymentData.paymentMethodData.tokenizationData,
+      cartNetwork:paymentData.paymentMethodData.info.cardNetwork,
+      billingAddress:paymentData.paymentMethodData.info.billingAddress
+    }
+    this.orderService.savePayment(payment);
+    this.cartService.clearCart();
+
+    this.router.navigateByUrl('/successorder');
     return {
       transactionState: 'SUCCESS'
 

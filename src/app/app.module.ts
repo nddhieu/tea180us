@@ -14,6 +14,7 @@ import { ProductdetailComponent } from './productdetail/productdetail.component'
 import { CheckoutComponent } from './checkout/checkout.component';
 import {CheckoutButtonComponent} from "./checkout-button/checkout-button.component";
 import {PhoneMaskDirective} from "./checkout/phone-mask.directive";
+import { SucessOrderComponent } from './sucess-order/sucess-order.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {PhoneMaskDirective} from "./checkout/phone-mask.directive";
     ProductdetailComponent,
     CheckoutComponent,
     CheckoutButtonComponent,
-    PhoneMaskDirective
+    PhoneMaskDirective,
+    SucessOrderComponent
   ],
     imports: [
         BrowserModule,
